@@ -1,0 +1,114 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Portfolio Builder API"
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/user": {
+      "get": {
+        "summary": "Obtener usuarios",
+        "responses": { "200": { "description": "OK" } }
+      },
+      "post": {
+        "summary": "Crear un usuario",
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "username": { "type": "string" },
+              "email": { "type": "string" },
+              "bio": { "type": "string" },
+              "themeId": { "type": "string" }
+            }
+          }
+        }],
+        "responses": { "201": { "description": "Creado" } }
+      }
+    },
+    "/user/{id}": {
+      "put": {
+        "summary": "Actualizar usuario",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": { "type": "string" },
+                "email": { "type": "string" },
+                "bio": { "type": "string" },
+                "themeId": { "type": "string" }
+              }
+            }
+          }
+        ],
+        "responses": { "204": { "description": "Actualizado" } }
+      },
+      "delete": {
+        "summary": "Eliminar usuario",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }],
+        "responses": { "200": { "description": "Eliminado" } }
+      }
+    },
+    "/theme": {
+      "get": {
+        "summary": "Obtener temas",
+        "responses": { "200": { "description": "OK" } }
+      },
+      "post": {
+        "summary": "Crear un tema",
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "primaryColor": { "type": "string" },
+              "fontFamily": { "type": "string" }
+            }
+          }
+        }],
+        "responses": { "201": { "description": "Creado" } }
+      }
+    },
+    "/theme/{id}": {
+      "put": {
+        "summary": "Actualizar tema",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string" },
+                "primaryColor": { "type": "string" },
+                "fontFamily": { "type": "string" }
+              }
+            }
+          }
+        ],
+        "responses": { "204": { "description": "Actualizado" } }
+      },
+      "delete": {
+        "summary": "Eliminar tema",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }],
+        "responses": { "200": { "description": "Eliminado" } }
+      }
+    }
+  }
+}
