@@ -4,10 +4,10 @@
     "version": "1.0.0",
     "title": "Portfolio Builder API"
   },
-  "host": "localhost:8080",
+  "host": "cse341-webservices-jp5b.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/user": {
