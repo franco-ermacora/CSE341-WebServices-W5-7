@@ -20,10 +20,16 @@ const createComment = async (req, res) => {
 };
 
 const updateComment = async (req, res) => {
+  // Validación para evitar campos vacíos
+  if (!req.body.text || !req.body.author) {
+    return res.status(400).json({ message: 'No puedes dejar campos vacíos.' });
+  }
+
   try {
     const commentId = new ObjectId(req.params.id);
     const comment = { text: req.body.text, author: req.body.author };
     const response = await mongodb.getDb().db('portfolio_db').collection('comments').replaceOne({ _id: commentId }, comment);
+    
     response.modifiedCount > 0 ? res.status(204).send() : res.status(404).json('No encontrado');
   } catch (err) { res.status(500).json(err); }
 };

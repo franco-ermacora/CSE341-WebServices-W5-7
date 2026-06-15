@@ -20,10 +20,16 @@ const createProject = async (req, res) => {
 };
 
 const updateProject = async (req, res) => {
+  // Validación para evitar campos vacíos
+  if (!req.body.title || !req.body.description) {
+    return res.status(400).json({ message: 'No puedes dejar campos vacíos.' });
+  }
+
   try {
     const projectId = new ObjectId(req.params.id);
     const project = { title: req.body.title, description: req.body.description };
     const response = await mongodb.getDb().db('portfolio_db').collection('projects').replaceOne({ _id: projectId }, project);
+    
     response.modifiedCount > 0 ? res.status(204).send() : res.status(404).json('No encontrado');
   } catch (err) { res.status(500).json(err); }
 };
