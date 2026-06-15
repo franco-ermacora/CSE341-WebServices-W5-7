@@ -6,10 +6,32 @@
   },
   "host": "cse341-webservices-jp5b.onrender.com",
   "basePath": "/",
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["https"],
+  "securityDefinitions": {
+    "GitHubAuth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://cse341-webservices-jp5b.onrender.com/auth/login",
+      "scopes": {
+        "user:email": "Acceso al email"
+      }
+    }
+  },
   "paths": {
+    "/auth/login": {
+      "get": {
+        "summary": "Iniciar sesión con GitHub",
+        "description": "Redirige al usuario a la página de login de GitHub.",
+        "responses": { "302": { "description": "Redirección a GitHub" } }
+      }
+    },
+    "/auth/logout": {
+      "get": {
+        "summary": "Cerrar sesión",
+        "description": "Destruye la sesión actual en el servidor y limpia la cookie.",
+        "responses": { "200": { "description": "Sesión cerrada correctamente" } }
+      }
+    },
     "/user": {
       "get": { "summary": "Obtener usuarios", "responses": { "200": { "description": "OK" } } },
       "post": {
