@@ -11,104 +11,40 @@
   ],
   "paths": {
     "/user": {
-      "get": {
-        "summary": "Obtener usuarios",
-        "responses": { "200": { "description": "OK" } }
-      },
+      "get": { "summary": "Obtener usuarios", "responses": { "200": { "description": "OK" } } },
       "post": {
         "summary": "Crear un usuario",
-        "parameters": [{
-          "in": "body",
-          "name": "body",
-          "required": true,
-          "schema": {
-            "type": "object",
-            "properties": {
-              "username": { "type": "string" },
-              "email": { "type": "string" },
-              "bio": { "type": "string" },
-              "themeId": { "type": "string" }
-            }
-          }
-        }],
+        "parameters": [{ "in": "body", "name": "body", "required": true, "schema": { "type": "object", "properties": { "username": { "type": "string" }, "email": { "type": "string" }, "bio": { "type": "string" }, "themeId": { "type": "string" } } } }],
         "responses": { "201": { "description": "Creado" } }
       }
     },
     "/user/{id}": {
-      "put": {
-        "summary": "Actualizar usuario",
-        "parameters": [
-          { "name": "id", "in": "path", "required": true, "type": "string" },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "username": { "type": "string" },
-                "email": { "type": "string" },
-                "bio": { "type": "string" },
-                "themeId": { "type": "string" }
-              }
-            }
-          }
-        ],
-        "responses": { "204": { "description": "Actualizado" } }
-      },
-      "delete": {
-        "summary": "Eliminar usuario",
-        "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }],
-        "responses": { "200": { "description": "Eliminado" } }
-      }
+      "put": { "summary": "Actualizar usuario", "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }, { "in": "body", "name": "body", "schema": { "type": "object", "properties": { "username": { "type": "string" }, "email": { "type": "string" }, "bio": { "type": "string" }, "themeId": { "type": "string" } } } }], "responses": { "204": { "description": "Actualizado" } } },
+      "delete": { "summary": "Eliminar usuario", "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }], "responses": { "200": { "description": "Eliminado" } } }
     },
     "/theme": {
-      "get": {
-        "summary": "Obtener temas",
-        "responses": { "200": { "description": "OK" } }
-      },
-      "post": {
-        "summary": "Crear un tema",
-        "parameters": [{
-          "in": "body",
-          "name": "body",
-          "required": true,
-          "schema": {
-            "type": "object",
-            "properties": {
-              "name": { "type": "string" },
-              "primaryColor": { "type": "string" },
-              "fontFamily": { "type": "string" }
-            }
-          }
-        }],
-        "responses": { "201": { "description": "Creado" } }
-      }
+      "get": { "summary": "Obtener temas", "responses": { "200": { "description": "OK" } } },
+      "post": { "summary": "Crear un tema", "parameters": [{ "in": "body", "name": "body", "required": true, "schema": { "type": "object", "properties": { "name": { "type": "string" }, "primaryColor": { "type": "string" }, "fontFamily": { "type": "string" } } } }], "responses": { "201": { "description": "Creado" } } }
     },
     "/theme/{id}": {
-      "put": {
-        "summary": "Actualizar tema",
-        "parameters": [
-          { "name": "id", "in": "path", "required": true, "type": "string" },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": { "type": "string" },
-                "primaryColor": { "type": "string" },
-                "fontFamily": { "type": "string" }
-              }
-            }
-          }
-        ],
-        "responses": { "204": { "description": "Actualizado" } }
-      },
-      "delete": {
-        "summary": "Eliminar tema",
-        "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }],
-        "responses": { "200": { "description": "Eliminado" } }
-      }
+      "put": { "summary": "Actualizar tema", "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }, { "in": "body", "name": "body", "schema": { "type": "object", "properties": { "name": { "type": "string" }, "primaryColor": { "type": "string" }, "fontFamily": { "type": "string" } } } }], "responses": { "204": { "description": "Actualizado" } } },
+      "delete": { "summary": "Eliminar tema", "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }], "responses": { "200": { "description": "Eliminado" } } }
+    },
+    "/project": {
+      "get": { "summary": "Obtener proyectos", "responses": { "200": { "description": "OK" } } },
+      "post": { "summary": "Crear un proyecto", "parameters": [{ "in": "body", "name": "body", "required": true, "schema": { "type": "object", "properties": { "title": { "type": "string" }, "description": { "type": "string" } } } }], "responses": { "201": { "description": "Creado" } } }
+    },
+    "/project/{id}": {
+      "put": { "summary": "Actualizar proyecto", "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }, { "in": "body", "name": "body", "schema": { "type": "object", "properties": { "title": { "type": "string" }, "description": { "type": "string" } } } }], "responses": { "204": { "description": "Actualizado" } } },
+      "delete": { "summary": "Eliminar proyecto", "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }], "responses": { "200": { "description": "Eliminado" } } }
+    },
+    "/comment": {
+      "get": { "summary": "Obtener comentarios", "responses": { "200": { "description": "OK" } } },
+      "post": { "summary": "Crear un comentario", "parameters": [{ "in": "body", "name": "body", "required": true, "schema": { "type": "object", "properties": { "text": { "type": "string" }, "author": { "type": "string" } } } }], "responses": { "201": { "description": "Creado" } } }
+    },
+    "/comment/{id}": {
+      "put": { "summary": "Actualizar comentario", "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }, { "in": "body", "name": "body", "schema": { "type": "object", "properties": { "text": { "type": "string" }, "author": { "type": "string" } } } }], "responses": { "204": { "description": "Actualizado" } } },
+      "delete": { "summary": "Eliminar comentario", "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }], "responses": { "200": { "description": "Eliminado" } } }
     }
   }
 }
