@@ -5,21 +5,20 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 const mongodb = require('./db/connect');
 
-// Importa tu configuración de auth (asegúrate de que el path sea correcto)
 require('./auth-config');
 
-// 1. CRÍTICO: Necesario para que Render (proxy) gestione bien las cookies
 app.set('trust proxy', 1);
 
-// 2. Configuración de sesión robusta
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: false, // Mejor en false para no crear sesiones vacías
+  saveUninitialized: false,
   cookie: {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production', // true solo si usas HTTPS en producción
-    sameSite: 'lax' // 'lax' suele funcionar mejor con OAuth en Render
+    // En producción (Render) usas HTTPS, así que secure: true es correcto
+    secure: process.env.NODE_ENV === 'production', 
+    // 'none' requiere secure: true. Si da error, cambia a 'lax'
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax' 
   }
 }));
 
@@ -28,7 +27,6 @@ app.use(passport.session());
 
 app.use(bodyParser.json());
 
-// CORS para que el frontend o Swagger puedan interactuar
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Z-Key');
@@ -36,10 +34,8 @@ app.use((req, res, next) => {
   next();
 });
 
-// Rutas
 app.use('/', require('./routes'));
 
-// Conexión a DB
 if (process.env.NODE_ENV !== 'test') {
   mongodb.initDb((err) => {
     if (err) console.log(err);
