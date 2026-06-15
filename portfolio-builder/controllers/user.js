@@ -2,11 +2,17 @@ const mongodb = require('../db/connect');
 const { ObjectId } = require('mongodb');
 
 const getAll = async (req, res) => {
+  const db = mongodb.getDb();
+  if (!db) {
+
+    return res.status(200).json([]);
+  }
   try {
-    const result = await mongodb.getDb().db('portfolio_db').collection('users').find().toArray();
-    res.setHeader('Content-Type', 'application/json');
+    const result = await db.db('portfolio_db').collection('users').find().toArray();
     res.status(200).json(result);
-  } catch (err) { res.status(500).json(err); }
+  } catch (err) {
+    res.status(500).json(err);
+  }
 };
 
 const createUser = async (req, res) => {

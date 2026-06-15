@@ -3,10 +3,16 @@ const { ObjectId } = require('mongodb');
 
 const getAll = async (req, res) => {
   try {
-    const result = await mongodb.getDb().db('portfolio_db').collection('themes').find().toArray();
-    res.setHeader('Content-Type', 'application/json');
+    const db = mongodb.getDb();
+    if (!db) {
+      return res.status(200).json([]);
+    }
+
+    const result = await db.db('portfolio_db').collection('themes').find().toArray();
     res.status(200).json(result);
-  } catch (err) { res.status(500).json(err); }
+  } catch (err) {
+    res.status(500).json(err);
+  }
 };
 
 const createTheme = async (req, res) => {
