@@ -11,23 +11,43 @@ const getAll = async (req, res) => {
 };
 
 const createProject = async (req, res) => {
-  if (!req.body.title || !req.body.description) return res.status(400).json({ message: 'Title y description son obligatorios' });
+  // Validación de los 7 campos
+  if (!req.body.title || !req.body.description || !req.body.technologies || 
+      !req.body.link || !req.body.status || !req.body.ownerId) {
+    return res.status(400).json({ message: 'Todos los campos son obligatorios' });
+  }
   try {
-    const project = { title: req.body.title, description: req.body.description };
+    const project = { 
+      title: req.body.title, 
+      description: req.body.description,
+      technologies: req.body.technologies,
+      link: req.body.link,
+      status: req.body.status,
+      ownerId: req.body.ownerId,
+      createdAt: new Date()
+    };
     const response = await mongodb.getDb().db('portfolio_db').collection('projects').insertOne(project);
     res.status(201).json(response);
   } catch (err) { res.status(500).json(err); }
 };
 
 const updateProject = async (req, res) => {
-  // Validación para evitar campos vacíos
-  if (!req.body.title || !req.body.description) {
+  if (!req.body.title || !req.body.description || !req.body.technologies || 
+      !req.body.link || !req.body.status || !req.body.ownerId) {
     return res.status(400).json({ message: 'No puedes dejar campos vacíos.' });
   }
 
   try {
     const projectId = new ObjectId(req.params.id);
-    const project = { title: req.body.title, description: req.body.description };
+    const project = { 
+      title: req.body.title, 
+      description: req.body.description,
+      technologies: req.body.technologies,
+      link: req.body.link,
+      status: req.body.status,
+      ownerId: req.body.ownerId,
+      updatedAt: new Date()
+    };
     const response = await mongodb.getDb().db('portfolio_db').collection('projects').replaceOne({ _id: projectId }, project);
     
     response.modifiedCount > 0 ? res.status(204).send() : res.status(404).json('No encontrado');

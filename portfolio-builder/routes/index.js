@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 router.use('/api-docs', require('./swagger'));
-router.use('/auth', require('./auth')); // <-- ESTA LÍNEA ES NECESARIA
+router.use('/auth', require('./auth'));
 router.use('/user', require('./user'));
 router.use('/theme', require('./theme'));
 router.use('/project', require('./projects'));
