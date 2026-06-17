@@ -57,12 +57,12 @@
       "get": { "summary": "Obtener proyectos", "responses": { "200": { "description": "OK" } } },
       "post": {
         "summary": "Crear un proyecto (7 campos)",
-        "parameters": [{ "in": "body", "name": "body", "required": true, "schema": { "type": "object", "properties": { "title": { "type": "string" }, "description": { "type": "string" }, "technologies": { "type": "string" }, "link": { "type": "string" }, "status": { "type": "string" }, "ownerId": { "type": "string" } } } }],
+        "parameters": [{ "in": "body", "name": "body", "required": true, "schema": { "type": "object", "properties": { "title": { "type": "string" }, "description": { "type": "string" }, "technologies": { "type": "string" }, "link": { "type": "string" }, "status": { "type": "string" }, "ownerId": { "type": "string" }, "category": { "type": "string" } } } }],
         "responses": { "201": { "description": "Creado" } }
       }
     },
     "/project/{id}": {
-      "put": { "summary": "Actualizar proyecto", "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }, { "in": "body", "name": "body", "schema": { "type": "object", "properties": { "title": { "type": "string" }, "description": { "type": "string" }, "technologies": { "type": "string" }, "link": { "type": "string" }, "status": { "type": "string" }, "ownerId": { "type": "string" } } } }], "responses": { "204": { "description": "Actualizado" } } },
+      "put": { "summary": "Actualizar proyecto", "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }, { "in": "body", "name": "body", "schema": { "type": "object", "properties": { "title": { "type": "string" }, "description": { "type": "string" }, "technologies": { "type": "string" }, "link": { "type": "string" }, "status": { "type": "string" }, "ownerId": { "type": "string" }, "category": { "type": "string" } } } }], "responses": { "204": { "description": "Actualizado" } } },
       "delete": { "summary": "Eliminar proyecto", "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }], "responses": { "200": { "description": "Eliminado" } } }
     },
     "/comment": {

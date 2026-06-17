@@ -11,10 +11,10 @@ const getAll = async (req, res) => {
 };
 
 const createProject = async (req, res) => {
-  // Validación de los 7 campos
+  // Ahora validamos 7 campos obligatorios del body
   if (!req.body.title || !req.body.description || !req.body.technologies || 
-      !req.body.link || !req.body.status || !req.body.ownerId) {
-    return res.status(400).json({ message: 'Todos los campos son obligatorios' });
+      !req.body.link || !req.body.status || !req.body.ownerId || !req.body.category) {
+    return res.status(400).json({ message: 'Todos los 7 campos son obligatorios' });
   }
   try {
     const project = { 
@@ -24,7 +24,7 @@ const createProject = async (req, res) => {
       link: req.body.link,
       status: req.body.status,
       ownerId: req.body.ownerId,
-      createdAt: new Date()
+      category: req.body.category
     };
     const response = await mongodb.getDb().db('portfolio_db').collection('projects').insertOne(project);
     res.status(201).json(response);
@@ -32,8 +32,9 @@ const createProject = async (req, res) => {
 };
 
 const updateProject = async (req, res) => {
+  // Validación de los 7 campos
   if (!req.body.title || !req.body.description || !req.body.technologies || 
-      !req.body.link || !req.body.status || !req.body.ownerId) {
+      !req.body.link || !req.body.status || !req.body.ownerId || !req.body.category) {
     return res.status(400).json({ message: 'No puedes dejar campos vacíos.' });
   }
 
@@ -46,7 +47,7 @@ const updateProject = async (req, res) => {
       link: req.body.link,
       status: req.body.status,
       ownerId: req.body.ownerId,
-      updatedAt: new Date()
+      category: req.body.category
     };
     const response = await mongodb.getDb().db('portfolio_db').collection('projects').replaceOne({ _id: projectId }, project);
     
